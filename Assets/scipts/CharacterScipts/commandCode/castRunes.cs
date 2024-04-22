@@ -6,18 +6,26 @@ using UnityEngine.UI;
 
 public class castRunes : MonoBehaviour
 {
+
+    private GameObject player;
     private int maxMana = 100;
     public float mana = 100;
     private string[] inputs = new string[2];
     public Slider manaBar;
+  
     private Queue<ICommand> commandQueue = new Queue<ICommand>();
 
-   
+    public Camera mainCamera;
+    public Camera otherCamera;
+    public float cameraSwitchDuration = 2f;
+
     void Start()
     {
         manaBar.minValue = 0;
         manaBar.maxValue = maxMana;
         manaBar.value = mana;
+        player = GameObject.FindGameObjectWithTag("Player");
+
     }
 
     
@@ -45,7 +53,8 @@ public class castRunes : MonoBehaviour
         {
             ICommand command = commandQueue.Dequeue();
             command.Execute();
-            inputs = Combination(inputs); 
+            inputs = Combination(inputs);
+            
         }
     }
 
@@ -53,6 +62,30 @@ public class castRunes : MonoBehaviour
     {
         mana += 1 * Time.deltaTime;
     }
+    IEnumerator SwitchToOtherCamera()
+    {
+        otherCamera.enabled = true;
+        mainCamera.enabled = false;
+        yield return new WaitForSeconds(cameraSwitchDuration);
+        otherCamera.enabled = false;
+        mainCamera.enabled = true;
+    }
+
+    IEnumerator ChangePlayerSprite()
+    {
+        
+        Sprite originalSprite = player.GetComponent<SpriteRenderer>().sprite;
+
+        // Cambia el sprite del jugador a negro
+        player.GetComponent<SpriteRenderer>().color = Color.black;
+
+        
+        yield return new WaitForSeconds(3f);
+
+        
+        player.GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
 
     string[] Combination(string[] inputs)
     {
@@ -60,17 +93,19 @@ public class castRunes : MonoBehaviour
 
         switch (combination)
         {
-            case "h1h1":
-                Debug.Log("h1 + h1");
+            case "LuzLuz":
+                Debug.Log("Luz + Luz");
+                StartCoroutine(SwitchToOtherCamera());
                 return new string[2];
-            case "h1h2":
-                Debug.Log(" h1 + h2");
+            case "LuzOscuirdad":
+                Debug.Log(" Luz + Oscuridad");
                 return new string[2];
-            case "h2h1":
-                Debug.Log(" h2 + h1");
+            case "OscuirdadLuz":
+                Debug.Log(" Oscuridad + Luz");
                 return new string[2];
-            case "h2h2":
-                Debug.Log("h2 + h2");
+            case "OscuirdadOscuirdad":
+                Debug.Log("Oscuridad + Oscuridad");
+                StartCoroutine(ChangePlayerSprite());
                 return new string[2];
             default:
                 Debug.Log("no reconocida");

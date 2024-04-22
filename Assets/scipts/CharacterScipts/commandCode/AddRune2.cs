@@ -18,7 +18,7 @@ public class AddRune2 : ICommand
         {
             if (string.IsNullOrEmpty(_inputs[i]))
             {
-                _inputs[i] = "h2";
+                _inputs[i] = "Oscuirdad";
                 break; 
             }
         }
