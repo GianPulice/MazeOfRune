@@ -16,6 +16,10 @@ public class characterMovment : MonoBehaviour
 
 
 
+    public void IncreaseSpeed()
+    {
+        speed += 2f; 
+    }
 
 
     void Update()

@@ -62,6 +62,12 @@ public class castRunes : MonoBehaviour
     {
         mana += 1 * Time.deltaTime;
     }
+
+    public void IncreaseManaRegen()
+    {
+        mana += 3 * Time.deltaTime;
+        maxMana = 150;
+    }
     IEnumerator SwitchToOtherCamera()
     {
         otherCamera.enabled = true;
