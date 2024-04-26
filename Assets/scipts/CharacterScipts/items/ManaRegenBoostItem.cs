@@ -11,10 +11,12 @@ public class ManaRegenBoostItem : Item
 
     public override void ApplyEffect(PlayerObs player)
     {
-        castRunes mana = player.GetComponent<castRunes>();
-        if (mana != null)
+        castRunes castRunes = player.GetComponent<castRunes>();
+        if (castRunes != null)
         {
-            mana.IncreaseManaRegen();
+            castRunes.mana += 50;
+            castRunes.maxMana += 30;
+            Debug.Log("tuki");
         }
     }
 

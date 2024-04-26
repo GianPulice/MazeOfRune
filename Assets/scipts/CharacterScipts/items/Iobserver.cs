@@ -5,5 +5,7 @@ using UnityEngine;
 public interface IObserver
 {
     void OnItemPickup(Item item);
+
+
 }
 
