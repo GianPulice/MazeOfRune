@@ -25,6 +25,9 @@ public class castRunes : MonoBehaviour
     public float detectionRange = 2f;
     public LayerMask doorLayer;
 
+    public GameObject fire;
+    public LayerMask pieceLayer;
+
     public Text manaText;
     void Start()
     {
@@ -111,6 +114,16 @@ public class castRunes : MonoBehaviour
         }
     }
 
+    void FirePiece()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, detectionRange, pieceLayer);
+
+        foreach (Collider2D collider in colliders)
+        {
+            collider.gameObject.SetActive(false);
+        }
+    }
+
     IEnumerator Key()
     {
         keyAsset.SetActive(true); 
@@ -118,6 +131,16 @@ public class castRunes : MonoBehaviour
         keyAsset.SetActive(false);
 
         Debug.Log("key on");
+    }
+
+
+    IEnumerator Fire()
+    {
+        fire.SetActive(true);
+        yield return new WaitForSeconds(OnTime);
+        fire.SetActive(false);
+
+        Debug.Log("fire on");
     }
 
     string[] Combination(string[] inputs)
@@ -139,6 +162,8 @@ public class castRunes : MonoBehaviour
 
             case "OscuirdadLuz":
                 Debug.Log(" Oscuridad + Luz");
+                FirePiece();
+                StartCoroutine(Fire());
                 return new string[2];
 
             case "OscuirdadOscuirdad":
