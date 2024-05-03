@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlayerObs : MonoBehaviour
 {
 
-
-
     private List<IObserver> observers = new List<IObserver>();
 
+    public void RegisterObserver(IObserver observer)
+    {
+        observers.Add(observer);
+    }
 
-
+  
     public void PickupItem(Item item)
     {
         item.ApplyEffect(this);
@@ -25,5 +27,4 @@ public class PlayerObs : MonoBehaviour
         }
     }
 
-   
 }
