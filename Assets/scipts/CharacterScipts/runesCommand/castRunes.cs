@@ -18,6 +18,13 @@ public class castRunes : MonoBehaviour
     public Camera otherCamera;
     public float cameraSwitchDuration = 2f;
 
+    public bool hide = false;
+
+    public GameObject keyAsset;
+    public float OnTime = 1f;
+    public float detectionRange = 2f;
+    public LayerMask doorLayer;
+
     public Text manaText;
     void Start()
     {
@@ -84,16 +91,34 @@ public class castRunes : MonoBehaviour
 
         Sprite originalSprite = player.GetComponent<SpriteRenderer>().sprite;
 
-        // Cambia el sprite del jugador a negro
         player.GetComponent<SpriteRenderer>().color = Color.black;
+        hide = true;
 
-
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
 
 
         player.GetComponent<SpriteRenderer>().color = Color.white;
+        hide = false;
     }
 
+    void DisableDoor()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, detectionRange, doorLayer);
+
+        foreach (Collider2D collider in colliders)
+        {
+            collider.gameObject.SetActive(false);
+        }
+    }
+
+    IEnumerator Key()
+    {
+        keyAsset.SetActive(true); 
+        yield return new WaitForSeconds(OnTime); 
+        keyAsset.SetActive(false);
+
+        Debug.Log("key on");
+    }
 
     string[] Combination(string[] inputs)
     {
@@ -105,16 +130,22 @@ public class castRunes : MonoBehaviour
                 Debug.Log("Luz + Luz");
                 StartCoroutine(SwitchToOtherCamera());
                 return new string[2];
+
             case "LuzOscuirdad":
                 Debug.Log(" Luz + Oscuridad");
+                DisableDoor();
+                StartCoroutine(Key());
                 return new string[2];
+
             case "OscuirdadLuz":
                 Debug.Log(" Oscuridad + Luz");
                 return new string[2];
+
             case "OscuirdadOscuirdad":
                 Debug.Log("Oscuridad + Oscuridad");
                 StartCoroutine(ChangePlayerSprite());
                 return new string[2];
+
             default:
                 Debug.Log("no reconocida");
                 return inputs;
@@ -127,5 +158,11 @@ public class castRunes : MonoBehaviour
         {
             manaText.text = "Mana: " + Mathf.RoundToInt(mana); 
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
 }

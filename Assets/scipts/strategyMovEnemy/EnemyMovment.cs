@@ -36,10 +36,17 @@ public class EnemyMovment : MonoBehaviour
     {
         if (isMoving)
         {
-            
+
             transform.Translate(currentDirection * speed * Time.deltaTime);
 
-           
+            if (currentDirection.x > 0)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+            else if (currentDirection.x < 0)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
         }
     }
 }
