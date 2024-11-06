@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 6424068733408189274}
   - component: {fileID: 832122572675898937}
   - component: {fileID: 490240294002650001}
+  - component: {fileID: 4396460489055994487}
   - component: {fileID: 6424068733408189252}
   - component: {fileID: 6424068733408189253}
   - component: {fileID: 6424068733408189255}
@@ -216,10 +217,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   fire: {fileID: 0}
-  piece:
+  pieceLayer:
     serializedVersion: 2
     m_Bits: 0
-  manaText: {fileID: 0}
+  manaPanel: {fileID: 0}
 --- !u!114 &490240294002650001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +233,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7038e2efa27197946a7896da4458a2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4396460489055994487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6424068733408189273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d55b00171c88de24691a3eb18a526816, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventoryPanel: {fileID: 0}
+  inventoryActive: 0
 --- !u!61 &6424068733408189252
 BoxCollider2D:
   m_ObjectHideFlags: 0

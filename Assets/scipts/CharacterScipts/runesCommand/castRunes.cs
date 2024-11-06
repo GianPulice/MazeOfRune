@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class castRunes : MonoBehaviour
 {
@@ -28,24 +29,28 @@ public class castRunes : MonoBehaviour
     public GameObject fire;
     public LayerMask pieceLayer;
 
-    public Text manaText;
+    public Image manaPanel; // Cambiar de Image a RectTransform para el panel
+
     void Start()
     {
-
-
         player = GameObject.FindGameObjectWithTag("Player");
-
+        
+        // Asegúrate de que el tipo de imagen sea "Filled"
+        if (manaPanel != null)
+        {
+            manaPanel.type = Image.Type.Filled; // Establecer el tipo de imagen a "Filled"
+            manaPanel.fillMethod = Image.FillMethod.Vertical; // Método de llenado vertical
+        }
     }
 
 
     void Update()
     {
-
-        UpdateManaText();
+        UpdateManaBar(); // Llamar a la función para actualizar la barra de mana
 
         if (mana <= maxMana)
         {
-            manaIncres(1);
+            manaIncres(5);
         }
 
 
@@ -177,11 +182,11 @@ public class castRunes : MonoBehaviour
         }
     }
 
-    void UpdateManaText()
+    void UpdateManaBar() // Nueva función para actualizar el panel de mana
     {
-        if (manaText != null) 
+        if (manaPanel != null)
         {
-            manaText.text = "Mana: " + Mathf.RoundToInt(mana); 
+            manaPanel.fillAmount = mana / maxMana;
         }
     }
 

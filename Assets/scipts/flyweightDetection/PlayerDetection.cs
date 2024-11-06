@@ -2,15 +2,17 @@ using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI; // Agregar esta línea para usar UI
 
 public class PlayerDetection : MonoBehaviour
 {
     public DetectionSettings detectionSettings;
     public LayerMask playerLayer;
     public Light2D detectionLight;
+    public Image detectionPanel; // Agregar esta línea para el panel de detección
 
     private bool isPlayerDetected = false;
-    private float detectionTimer = 0f;
+    public float detectionTimer = 0f;
     private Color originalColor;
 
     private void Start()
@@ -42,10 +44,12 @@ public class PlayerDetection : MonoBehaviour
         if (isPlayerDetected)
         {
             detectionLight.color = Color.red;
+            detectionPanel.fillAmount = detectionTimer / detectionSettings.time; // Actualizar el panel de detección
         }
         else
         {
             detectionLight.color = originalColor;
+            detectionPanel.fillAmount = 0f; // Reiniciar el panel si no hay detección
         }
 
         if (!isPlayerDetected)
