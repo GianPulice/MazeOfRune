@@ -184,12 +184,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09a66f0ed0966b4aa1f8f943d9e21df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 1.06
-  detectionTime: 2.5
+  detectionSettings: {fileID: 0}
   playerLayer:
     serializedVersion: 2
     m_Bits: 1
   detectionLight: {fileID: 6054473854759817605}
+  detectionPanel: {fileID: 0}
+  detectionTimer: 0
 --- !u!1 &8662295694407222011
 GameObject:
   m_ObjectHideFlags: 0

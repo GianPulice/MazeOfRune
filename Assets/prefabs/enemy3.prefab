@@ -137,12 +137,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09a66f0ed0966b4aa1f8f943d9e21df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 0.91
-  detectionTime: 10.62
+  detectionSettings: {fileID: 0}
   playerLayer:
     serializedVersion: 2
     m_Bits: 1
   detectionLight: {fileID: 1094004862003092682}
+  detectionPanel: {fileID: 0}
+  detectionTimer: 0
 --- !u!50 &574547529105839075
 Rigidbody2D:
   serializedVersion: 4
