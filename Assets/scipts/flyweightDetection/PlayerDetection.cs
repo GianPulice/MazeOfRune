@@ -36,7 +36,7 @@ public class PlayerDetection : MonoBehaviour
                 if (detectionTimer >= detectionSettings.time)
                 {
                     SceneManager.LoadScene("Atrapado");
-                    break;
+                    return;
                 }
             }
         }
@@ -44,16 +44,12 @@ public class PlayerDetection : MonoBehaviour
         if (isPlayerDetected)
         {
             detectionLight.color = Color.red;
-            detectionPanel.fillAmount = detectionTimer / detectionSettings.time; // Actualizar el panel de detección
+            detectionPanel.fillAmount = 0.5f;
         }
         else
         {
             detectionLight.color = originalColor;
-            detectionPanel.fillAmount = 0f; // Reiniciar el panel si no hay detección
-        }
-
-        if (!isPlayerDetected)
-        {
+            detectionPanel.fillAmount = 0f;
             detectionTimer = 0f;
         }
     }

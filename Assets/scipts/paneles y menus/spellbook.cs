@@ -9,7 +9,7 @@ public class spellbook : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.F1))
+        if (Input.GetKey(KeyCode.Space))
         {
             panel.SetActive(true);
         }
